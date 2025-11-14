@@ -1,0 +1,52 @@
+/* Base: always start hidden and apply keyframe styles during delay & after paint */
+.slide {
+    opacity: 0;
+    animation-name: fadeSlideshow;
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    /* <- uses 0% keyframe during delay to stay hidden */
+    will-change: opacity;
+    backface-visibility: hidden;
+}
+
+/* Staggered delays for 3 slides */
+.bg-fade-1 {
+    animation-delay: 0s;
+}
+
+.bg-fade-2 {
+    animation-delay: 3s;
+}
+
+.bg-fade-3 {
+    animation-delay: 6s;
+}
+
+/* One-at-a-time crossfade */
+@keyframes fadeSlideshow {
+    0% {
+        opacity: 0;
+    }
+
+    /* hidden before fade-in */
+    8% {
+        opacity: 1;
+    }
+
+    /* fade-in completes */
+    33% {
+        opacity: 1;
+    }
+
+    /* fully visible window (≈3s per slide) */
+    41% {
+        opacity: 0;
+    }
+
+    /* fade-out */
+    100% {
+        opacity: 0;
+    }
+}
