@@ -14,7 +14,7 @@ const registerSchema = z.object({
   location: z.string().nonempty({ message: 'Location is required' }),
   team: z.string().nonempty({ message: 'Team is required' }),
   transaction_id: z.string().nonempty({ message: 'Transaction ID is required' }),
-  picture: z.any().optional(),
+  picture: z.instanceof(File, { message: 'Picture is required' }),
 });
 
 export type IRegisterSchema = z.infer<typeof registerSchema>;
@@ -31,7 +31,7 @@ const Register = () => {
       location: '',
       team: 'Bangladesh',
       transaction_id: '',
-      picture: null,
+      picture: undefined,
     },
   });
   const onSubmit = (data: IRegisterSchema) => {
@@ -128,20 +128,41 @@ const Register = () => {
                   {/* Upload Box */}
                   <label
                     className='w-full border border-gray-300 rounded-md py-10
-               flex flex-col items-center justify-center cursor-pointer
-               hover:bg-gray-100 transition text-center'
+      flex flex-col items-center justify-center cursor-pointer
+      hover:bg-gray-100 transition text-center'
                   >
-                    {/* Upload Icon */}
+                    <TbCloudUpload className='text-5xl text-gray-500 mb-3' />
 
-                    {/* Centered Text */}
                     <span className='text-sm text-gray-600 font-medium'>Click to upload</span>
-                    <p className='text-sm text-gray-500 -mt-1'>
+
+                    <p className='text-xs text-gray-500'>
                       (You must submit a picture wearing the team jersey.)
                     </p>
-                    <TbCloudUpload className='text-5xl text-gray-500 mb-2' />
-
-                    <input type='file' {...methods.register('picture')} className='hidden' />
+                    {methods.watch('picture') && (
+                      <p className='text-sm text-green-600 font-medium mt-1'>
+                        Selected: {methods.watch('picture')?.name}
+                      </p>
+                    )}
+                    <input
+                      type='file'
+                      accept='image/*'
+                      {...methods.register('picture', { required: 'Picture is required' })}
+                      className='hidden'
+                      onChange={(e: any) => {
+                        methods.setValue('picture', e.target.files?.[0]);
+                        methods.trigger('picture'); // validate immediately
+                      }}
+                    />
                   </label>
+
+                  {/* Show selected file name */}
+
+                  {/* Error message */}
+                  {methods.formState.errors.picture && (
+                    <p className='text-sm text-red-600'>
+                      {methods.formState.errors.picture.message as string}
+                    </p>
+                  )}
                 </div>
 
                 {/* Submit Button - full width */}

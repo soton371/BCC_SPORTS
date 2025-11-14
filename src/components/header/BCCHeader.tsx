@@ -10,12 +10,12 @@ const BCCHeader = () => {
 
   const navLinks = [
     { href: '/', label: 'HOME' },
-    { href: '/gallery', label: 'GALLERY' },
+    { href: '/', label: 'GALLERY' },
     { href: '/fans-tournament', label: 'FAN’S TOURNAMENT' },
     { type: 'image', src: '/bccImages/logo.jpg', alt: 'Star Icon' },
-    { href: '/about-us', label: 'ABOUT US' },
-    { href: '/player-list', label: 'PLAYER LIST' },
-    { href: '/contact-us', label: 'CONTACT US' },
+    { href: '/', label: 'ABOUT US' },
+    { href: '/', label: 'PLAYER LIST' },
+    { href: '/', label: 'CONTACT US' },
   ];
 
   return (

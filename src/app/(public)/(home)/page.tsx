@@ -7,6 +7,7 @@ import BCCBlog from './_component/BCCBlog';
 import BCCPhotglarry from './_component/BCCPhotglarry';
 import Banner from './_component/Banner';
 import PowerHouseBCC from './_component/PowerHouseBCC';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: {
@@ -77,9 +78,12 @@ export default function Home() {
             </p>
 
             <div className='flex flex-wrap justify-center md:justify-start gap-2 md:gap-4'>
-              <button className='px-6 py-3 w-full md:w-fit bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
-                Register Now
-              </button>
+              <Link href='/sing-up'>
+                <button className='px-6 py-3 w-full md:w-fit bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
+                  Register Now
+                </button>
+              </Link>
+
               <button className='px-6 w-full md:w-fit py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
                 Visit Facebook Page
               </button>

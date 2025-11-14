@@ -5,7 +5,6 @@ import storageSession from 'redux-persist/lib/storage/session';
 import { baseApi } from './RTK_API';
 import modifyReducer from './slice/ModifySearchState';
 import noticeSliceReducer from './slice/noticeSlice';
-import bookFormReducer from './slice/bookFormSlice';
 import popupReducer from './slice/popupSlice';
 
 const noticePersistConfig = {
@@ -23,7 +22,6 @@ const bookFormPersistConfig = {
 
 const noticePersist = persistReducer(noticePersistConfig, noticeSliceReducer);
 const popupPersist = persistReducer(popupPersistConfig, popupReducer);
-const bookFormPersist = persistReducer(bookFormPersistConfig, bookFormReducer);
 
 export const store = configureStore({
   reducer: {
@@ -31,7 +29,6 @@ export const store = configureStore({
     searchExpand: modifyReducer,
     notice: noticePersist,
     popup: popupPersist,
-    bookForm: bookFormPersist,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(baseApi.middleware),

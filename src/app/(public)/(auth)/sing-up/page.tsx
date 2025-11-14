@@ -1,5 +1,4 @@
 import Register from '../_components/Register';
-import SignUpPage from '../_components/sign-up-page';
 import { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {

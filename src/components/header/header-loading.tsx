@@ -1,7 +1,6 @@
 'use client';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useGetProfileQuery } from '@/lib/APIs/common-api';
 import { getImageLink } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { ChevronDown, LogOut, User } from 'lucide-react';
@@ -22,9 +21,9 @@ export default function HeaderLoading() {
   const pathname = usePathname();
 
   const session = useSession();
-  const { data } = useGetProfileQuery({}, { skip: session.status !== 'authenticated' });
+  // const { data } = useGetProfileQuery({}, { skip: session.status !== 'authenticated' });
 
-  const userProfile = data?.data;
+  // const userProfile = data?.data;
   const user = session?.data?.user;
 
   const isHomePage =
@@ -114,7 +113,7 @@ export default function HeaderLoading() {
                   {user ? (
                     <>
                       <Avatar className='h-8 w-8  transition-all duration-300'>
-                        <AvatarImage src={getImageLink(userProfile?.photo)} alt={user.name} />
+                        {/* <AvatarImage src={getImageLink(userProfile?.photo)} alt={user.name} /> */}
                         <AvatarFallback className='bg-destructive font-semibold'>
                           {user.name?.slice(0, 2).toUpperCase()}
                         </AvatarFallback>
@@ -143,7 +142,7 @@ export default function HeaderLoading() {
                   <div className='px-6 py-0 md:py-4 bg-gradient-to-br from-blue-50 to-purple-50'>
                     <div className='flex items-center space-x-3'>
                       <Avatar className='h-12 w-12 ring-2 ring-white/50'>
-                        <AvatarImage src={user.photo!} alt={user.name} />
+                        {/* <AvatarImage src={user.photo!} alt={user.name} /> */}
                         <AvatarFallback className='bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold text-lg'>
                           {user.name?.slice(0, 2).toUpperCase()}
                         </AvatarFallback>
@@ -247,7 +246,7 @@ export default function HeaderLoading() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className='flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700  hover:bg-gray-100  hover:text-blue-600 transition-all duration-300'
               >
-                {user?.photo ? (
+                {/* {user?.photo ? (
                   <Image
                     src={getImageLink(user?.photo)}
                     alt='Profile'
@@ -257,7 +256,7 @@ export default function HeaderLoading() {
                   />
                 ) : (
                   <User className='h-6 w-6' />
-                )}
+                )} */}
                 <span>My Profile</span>
               </Link>
             )}

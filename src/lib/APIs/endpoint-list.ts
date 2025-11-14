@@ -11,28 +11,4 @@ export const API_ENDPOINTS = {
   PROFILE: 'b2c/profile',
   CHANGE_PASSWORD: 'b2c/profile/change-password',
   LOGOUT: 'logout',
-
-  // SELECT____________
-  AIRPORT_SEARCH: 'public/common/airport',
-  HOTEL_LIST_SEARCH: 'public/common/location-hotel',
-
-  // SITE_CONFIG
-  SITE_CONFIG_HOME: 'agent-b2c/config/home',
-  ABOUT_US: 'agent-b2c/config/about-us',
-  CONTACT_US: 'agent-b2c/config/contact-us',
-  PRIVACY_POLICY: 'agent-b2c/config/privacy-policy',
-  TERMS_AND_CONDITION: 'agent-b2c/config/terms-and-conditions',
-  PAYMENT_METHOD: 'agent-b2c/config/accounts',
-
-  //DEPOSIT
-  DEPOSIT: 'agent-b2c/payments/deposit',
-
-  //TRANSACTION
-  TRANSACTION: 'agent-b2c/payments/ledger',
-
-  //INVOICE
-  INVOICE: 'agent-b2c/payments/invoice',
-
-  //SUPPORT
-  SUPPORT: 'agent-b2c/support-ticket',
 };

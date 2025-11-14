@@ -1,5 +1,4 @@
 import { auth } from '@/auth';
-import { HTTPResponse } from '@/type/type';
 
 interface FetchOptions extends RequestInit {
   headers?: Record<string, string>;
@@ -13,9 +12,9 @@ export const fetchRequest = async <T>(
   url: string,
   options: FetchOptions = {},
   delayMs: number = 0,
-): Promise<HTTPResponse<T>> => {
+): Promise<any> => {
   const session = await auth();
-  const token = session?.user?.token;
+  const token = /* session?.user?.token; */ '';
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -36,16 +35,7 @@ export const fetchRequest = async <T>(
 
   const response = await fetch(`${url}`, config);
 
-  // console.log('✅ API RESPONSE RECEIVED:', response.status, response.url);
-
-  // if (!response.ok) {
-  //   const err = await response.text();
-  //   const error = new Error(err);
-
-  //   throw error;
-  // }
-
-  const data: HTTPResponse<T> = await response.json();
+  const data /* HTTPResponse<T>  */ = await response.json();
 
   return data;
 };
