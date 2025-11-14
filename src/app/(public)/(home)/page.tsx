@@ -55,9 +55,9 @@ export default function Home() {
         <div className='absolute inset-0 bg-black/10 z-10'></div>
 
         {/* Content */}
-        <div className='relative z-10 container mx-auto px-5 py-20 md:py-20 flex flex-col-reverse md:flex-row items-center justify-between text-white gap-10'>
+        <div className='relative z-10 container mx-auto px-5 py-10 md:py-20 flex flex-col-reverse md:flex-row items-center justify-between text-white gap-10'>
           {/* Left Text */}
-          <div className='w-full text-center md:text-left space-y-6'>
+          <div className='w-full text-center md:text-left space-y-5'>
             <div className='text-4xl w-full sm:text-5xl lg:text-6xl xl:text-8xl font-bold tracking-wide text-[#E1E100] leading-tight'>
               <div className='flex items-baseline justify-start'>
                 <Image
@@ -65,7 +65,7 @@ export default function Home() {
                   width={50}
                   height={60}
                   alt='Tournament Cup'
-                  className='mr-3'
+                  className='mr-3 w-6 md:w-14'
                 />
                 BCC Fan’s
               </div>
@@ -76,11 +76,11 @@ export default function Home() {
               arranged by - BCC Borogangdia Cricket Club
             </p>
 
-            <div className='flex flex-wrap justify-center md:justify-start gap-4'>
-              <button className='px-6 py-3 bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
+            <div className='flex flex-wrap justify-center md:justify-start gap-2 md:gap-4'>
+              <button className='px-6 py-3 w-full md:w-fit bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
                 Register Now
               </button>
-              <button className='px-6 py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
+              <button className='px-6 w-full md:w-fit py-3 border border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
                 Visit Facebook Page
               </button>
             </div>
