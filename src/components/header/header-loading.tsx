@@ -4,7 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { getImageLink } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { ChevronDown, LogOut, User } from 'lucide-react';
-import { signOut, useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -20,11 +20,11 @@ export default function HeaderLoading() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  const session = useSession();
+  // const session = useSession();
   // const { data } = useGetProfileQuery({}, { skip: session.status !== 'authenticated' });
 
   // const userProfile = data?.data;
-  const user = session?.data?.user;
+  // const user = session?.data?.user;
 
   const isHomePage =
     pathname === '/' ||
@@ -103,7 +103,7 @@ export default function HeaderLoading() {
           <div className='flex items-center space-x-3'>
             {/* User Menu */}
             <Popover open={isUserMenuOpen} onOpenChange={setIsUserMenuOpen}>
-              <PopoverTrigger asChild>
+              {/* <PopoverTrigger asChild>
                 <Button
                   className={cn(
                     'flex items-center space-x-2 rounded-full bg-secondary',
@@ -113,7 +113,6 @@ export default function HeaderLoading() {
                   {user ? (
                     <>
                       <Avatar className='h-8 w-8  transition-all duration-300'>
-                        {/* <AvatarImage src={getImageLink(userProfile?.photo)} alt={user.name} /> */}
                         <AvatarFallback className='bg-destructive font-semibold'>
                           {user.name?.slice(0, 2).toUpperCase()}
                         </AvatarFallback>
@@ -130,19 +129,17 @@ export default function HeaderLoading() {
                     <Link href={'/sign-in'}>Sign In</Link>
                   )}
                 </Button>
-              </PopoverTrigger>
+              </PopoverTrigger> */}
 
-              {user && (
+              {/* {user && (
                 <PopoverContent
                   className='w-72 p-0 shadow-2xl border-0 bg-white/95 backdrop-blur-xl'
                   align='end'
                   sideOffset={10}
                 >
-                  {/* User Header */}
                   <div className='px-6 py-0 md:py-4 bg-gradient-to-br from-blue-50 to-purple-50'>
                     <div className='flex items-center space-x-3'>
                       <Avatar className='h-12 w-12 ring-2 ring-white/50'>
-                        {/* <AvatarImage src={user.photo!} alt={user.name} /> */}
                         <AvatarFallback className='bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold text-lg'>
                           {user.name?.slice(0, 2).toUpperCase()}
                         </AvatarFallback>
@@ -154,7 +151,6 @@ export default function HeaderLoading() {
                     </div>
                   </div>
 
-                  {/* Menu Items */}
                   <div>
                     <Link
                       href='/my-account'
@@ -166,7 +162,7 @@ export default function HeaderLoading() {
                     </Link>
                   </div>
 
-                  {/* Logout */}
+              
                   <div>
                     <button
                       onClick={() => signOut({ redirectTo: '/', redirect: true })}
@@ -177,7 +173,7 @@ export default function HeaderLoading() {
                     </button>
                   </div>
                 </PopoverContent>
-              )}
+              )} */}
             </Popover>
 
             {/* Mobile Menu Toggle */}
@@ -224,7 +220,7 @@ export default function HeaderLoading() {
       >
         <div className='bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-t border-gray-200/20 dark:border-gray-700/20'>
           <div className='px-4 py-6 space-y-1'>
-            {navLinks.map(({ href, label }) => (
+            {/* {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
@@ -238,28 +234,17 @@ export default function HeaderLoading() {
               >
                 {label}
               </Link>
-            ))}
-
+            ))} */}
+            {/* 
             {user && (
               <Link
                 href='/my-account'
                 onClick={() => setIsMobileMenuOpen(false)}
                 className='flex items-center gap-3 px-4 py-3 rounded-lg text-base font-medium text-gray-700  hover:bg-gray-100  hover:text-blue-600 transition-all duration-300'
               >
-                {/* {user?.photo ? (
-                  <Image
-                    src={getImageLink(user?.photo)}
-                    alt='Profile'
-                    width={28}
-                    height={28}
-                    className='rounded-full object-cover ring-2 ring-gray-200 dark:ring-gray-700'
-                  />
-                ) : (
-                  <User className='h-6 w-6' />
-                )} */}
                 <span>My Profile</span>
               </Link>
-            )}
+            )} */}
           </div>
         </div>
       </div>

@@ -7,11 +7,11 @@ type Props = {
 };
 
 const layout = async ({ children }: Props) => {
-  const data = await auth();
+  // const data = await auth();
 
-  if (data?.user?.email) {
-    redirect('/');
-  }
+  // if (data?.user?.email) {
+  //   redirect('/');
+  // }
 
   return children;
 };

@@ -10,7 +10,6 @@ import { TbCloudUpload } from 'react-icons/tb';
 import CongratulationRegistration from '../../(home)/_component/CongratulationRegistration';
 import {
   useCreateRegistrationMutation,
-  useGetPlayerQuery,
   useGetRolesQuery,
   useGetTeamsQuery,
   useGetTournamentQuery,
@@ -67,7 +66,7 @@ const Register = () => {
     formData.append('bkash_transaction_id', data.bkash_transaction_id);
 
     if (data.image) {
-      formData.append('image', data.image); // file input
+      formData.append('image', data.image);
     }
 
     createRegistration(formData);
@@ -83,15 +82,12 @@ const Register = () => {
 
   if (isError && error) {
     if ('status' in error) {
-      // FetchBaseQueryError (API responded)
       errorMessage = (error.data as any)?.message || 'Something went wrong while fetching roles!';
     } else {
-      // SerializedError (network / unexpected error)
       errorMessage = error.message || 'Network error!';
     }
   }
 
-  console.log(error);
   return (
     <div className=''>
       <BCCHeader />

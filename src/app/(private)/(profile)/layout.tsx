@@ -3,12 +3,9 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { getImageLink } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { ListOrdered, KeySquare, LogOut, Menu, Settings, User } from 'lucide-react';
-import { signOut, useSession } from 'next-auth/react';
 import Head from 'next/head';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -26,7 +23,6 @@ interface LayoutProps {
 export default function AccountLayout({ children }: LayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
-  const session = useSession();
   // const { data } = useGetProfileQuery({}, { skip: session.status !== 'authenticated' });
   // const userProfile = data?.data;
 
@@ -66,7 +62,6 @@ export default function AccountLayout({ children }: LayoutProps) {
 
   const handleLogout = () => {
     setIsMenuOpen(false);
-    signOut({ redirect: true, redirectTo: '/' });
   };
 
   const MenuItem = ({ item }: { item: MenuItem }) => {

@@ -7,7 +7,6 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
-import { getSession, signOut } from 'next-auth/react';
 import { TagTypes } from './tagTypes';
 
 interface EnhancedFetchArgs extends FetchArgs {
@@ -20,12 +19,11 @@ const baseQuery: BaseQueryFn<string | EnhancedFetchArgs, unknown, FetchBaseQuery
     credentials: 'include',
 
     prepareHeaders: async (headers, { getState: _state }) => {
-      const session = await getSession();
+      // const session = await getSession();
       // const token = session?.user?.token;
       // if (token) {
       //   headers.set('authorization', `Bearer ${token}`);
       // }
-
       // headers.set('Accept', 'application/json');
     },
   });
@@ -47,7 +45,7 @@ export const baseApi = createApi({
     }
 
     if (response?.error?.status === 401) {
-      signOut({ redirect: true });
+      // signOut({ redirect: true });
     }
 
     return response;
