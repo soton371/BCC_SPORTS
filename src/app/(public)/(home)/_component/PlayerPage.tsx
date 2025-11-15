@@ -16,6 +16,7 @@ const PlayerPage = () => {
       <div className='w-full max-w-6xl'>
         {activeTab === 'players' && <PlayerList />}
         {activeTab === 'status' && <CheckStatus />}
+        {activeTab === 'team_list' && <TeamList />}
       </div>
     </div>
   );
@@ -42,12 +43,12 @@ const PlayerTabs = ({ activeTab, setActiveTab }: PlayerTabsProps) => {
         <div
           key={tab.id}
           onClick={() => setActiveTab(tab.id)}
-          className={`px-6 py-3 flex justify-center items-center cursor-pointer ${
+          className={`md:px-6 py-3 flex justify-center items-center cursor-pointer ${
             activeTab === tab.id ? 'border-b-4 border-orange-500' : ''
           }`}
         >
           <p
-            className={`text-lg font-normal leading-7 ${
+            className={`md:text-lg font-normal leading-7 ${
               activeTab === tab.id ? 'text-orange-500' : 'text-blue-950'
             }`}
           >
@@ -88,33 +89,33 @@ const PlayerList = () => {
         </thead>
         <tbody className='bg-white divide-y divide-gray-200'>
           {data?.map((player: any, index: number) => (
-            <tr key={player.id} className='hover:bg-gray-50 transition'>
+            <tr key={player?.id} className='hover:bg-gray-50 transition'>
               <td className='px-4 py-2 font-semibold text-gray-900'>{index + 1}</td>
               <td className='px-4 py-2'>
-                {player.image ? (
+                {player?.image ? (
                   <img
-                    src={player.image}
-                    alt={player.name}
+                    src={player?.image}
+                    alt={player?.name}
                     className='w-12 h-12 object-cover rounded-full'
                   />
                 ) : (
                   '—'
                 )}
               </td>
-              <td className='px-4 py-2 text-blue-950 font-semibold'>{player.name}</td>
-              <td className='px-4 py-2 text-gray-700'>{player.phone}</td>
-              <td className='px-4 py-2 text-orange-500'>{player.role?.name}</td>
-              <td className='px-4 py-2 text-indigo-600'>{player.team?.name}</td>
+              <td className='px-4 py-2 text-blue-950 font-semibold'>{player?.name}</td>
+              <td className='px-4 py-2 text-gray-700'>{player?.phone}</td>
+              <td className='px-4 py-2 text-orange-500'>{player?.role?.name}</td>
+              <td className='px-4 py-2 text-indigo-600'>{player?.team?.name}</td>
               <td
                 className={`px-4 py-2 font-semibold ${
-                  player.status === 'pending'
+                  player?.status === 'pending'
                     ? 'text-yellow-500'
-                    : player.status === 'approved'
+                    : player?.status === 'approved'
                       ? 'text-green-600'
                       : 'text-red-600'
                 }`}
               >
-                {player.status}
+                {player?.status}
               </td>
             </tr>
           ))}
@@ -212,7 +213,9 @@ export const CheckStatus = () => {
             required
             className='px-3 py-2 border rounded-lg outline-none focus:ring-1 focus:ring-orange-500'
           >
-            <option value=''>Select Tournament</option>
+            <option value='' disabled>
+              Select Tournament
+            </option>
             {tournaments?.map((t: any) => (
               <option key={t.id} value={t.id}>
                 {t.name}
@@ -231,7 +234,7 @@ export const CheckStatus = () => {
 
       {/* Table */}
       {!players || players.length === 0 ? (
-        <p className='text-center text-gray-500 py-10'>Coming Soon...</p>
+        <p className='text-center text-gray-500 py-10'>Check your status...</p>
       ) : (
         <table className='min-w-full divide-y divide-gray-200'>
           <thead className='bg-gray-50'>
@@ -241,42 +244,40 @@ export const CheckStatus = () => {
               <th className='px-4 py-3 text-left text-sm font-medium text-blue-950'>Name</th>
               <th className='px-4 py-3 text-left text-sm font-medium text-yellow-500'>Status</th>
               <th className='px-4 py-3 text-left text-sm font-medium text-gray-700'>Phone</th>
-              <th className='px-4 py-3 text-left text-sm font-medium text-purple-500'>Bkash Txn</th>
               <th className='px-4 py-3 text-left text-sm font-medium text-indigo-600'>Team</th>
               <th className='px-4 py-3 text-left text-sm font-medium text-orange-500'>Role</th>
             </tr>
           </thead>
           <tbody className='bg-white divide-y divide-gray-200'>
             {players.map((player: any, index: number) => (
-              <tr key={player.id} className='hover:bg-gray-50 transition'>
+              <tr key={player?.id} className='hover:bg-gray-50 transition'>
                 <td className='px-4 py-2 font-semibold text-gray-900'>{index + 1}</td>
                 <td className='px-4 py-2'>
-                  {player.image ? (
+                  {player?.image ? (
                     <img
-                      src={player.image}
-                      alt={player.name}
+                      src={player?.image}
+                      alt={player?.name}
                       className='w-12 h-12 object-cover rounded-full'
                     />
                   ) : (
                     '—'
                   )}
                 </td>
-                <td className='px-4 py-2 text-blue-950 font-semibold'>{player.name}</td>
+                <td className='px-4 py-2 text-blue-950 text-sm md:font-semibold'>{player?.name}</td>
                 <td
                   className={`px-4 py-2 font-semibold ${
-                    player.status === 'pending'
+                    player?.status === 'pending'
                       ? 'text-yellow-500'
-                      : player.status === 'approved'
+                      : player?.status === 'approved'
                         ? 'text-green-600'
                         : 'text-red-600'
                   }`}
                 >
-                  {player.status}
+                  {player?.status}
                 </td>
-                <td className='px-4 py-2 text-gray-700'>{player.phone}</td>
-                <td className='px-4 py-2 text-purple-500'>{player.bkash_transaction_id}</td>
-                <td className='px-4 py-2 text-indigo-600'>{player.team?.name}</td>
-                <td className='px-4 py-2 text-orange-500'>{player.role?.name}</td>
+                <td className='px-4 py-2 text-gray-700'>{player?.phone}</td>
+                <td className='px-4 py-2 text-indigo-600'>{player?.team?.name}</td>
+                <td className='px-4 py-2 text-orange-500'>{player?.role?.name}</td>
               </tr>
             ))}
           </tbody>
@@ -287,16 +288,11 @@ export const CheckStatus = () => {
 };
 
 // --------------------- Search Tab ---------------------
-const PlayerSearchBar = () => {
+const TeamList = () => {
   return (
     <div className='w-full max-w-4xl mx-auto p-3 md:p-4 bg-white rounded-2xl shadow-md'>
       <div className='pl-4 pr-3 py-2 bg-zinc-100 rounded-lg flex items-center gap-2'>
-        <span className='text-xl'>🔍</span>
-        <input
-          type='text'
-          placeholder='Search players by phone number...'
-          className='bg-transparent w-full outline-none text-sm text-gray-600'
-        />
+        <p className='text-center text-gray-500 py-10'>Coming Soon...</p>
       </div>
     </div>
   );
