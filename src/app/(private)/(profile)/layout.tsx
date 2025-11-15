@@ -3,7 +3,6 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { useGetProfileQuery } from '@/lib/APIs/common-api';
 import { getImageLink } from '@/lib/helper';
 import { cn } from '@/lib/utils';
 import { ListOrdered, KeySquare, LogOut, Menu, Settings, User } from 'lucide-react';
@@ -28,8 +27,8 @@ export default function AccountLayout({ children }: LayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
   const session = useSession();
-  const { data } = useGetProfileQuery({}, { skip: session.status !== 'authenticated' });
-  const userProfile = data?.data;
+  // const { data } = useGetProfileQuery({}, { skip: session.status !== 'authenticated' });
+  // const userProfile = data?.data;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -113,7 +112,7 @@ export default function AccountLayout({ children }: LayoutProps) {
 
   const UserProfile = () => (
     <div className='flex flex-col items-center text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg'>
-      <div className='relative mb-3'>
+      {/* <div className='relative mb-3'>
         {userProfile?.photo ? (
           <Image
             src={getImageLink(userProfile?.photo)}
@@ -135,7 +134,7 @@ export default function AccountLayout({ children }: LayoutProps) {
       </h3>
       <p className='text-sm text-gray-600 truncate max-w-full'>
         {userProfile?.email || 'user@example.com'}
-      </p>
+      </p> */}
     </div>
   );
 
