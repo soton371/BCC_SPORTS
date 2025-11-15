@@ -78,7 +78,7 @@ export default function Home() {
             </p>
 
             <div className='flex flex-wrap justify-center md:justify-start gap-2 md:gap-4'>
-              <Link href='/sing-up'>
+              <Link href='/sing-up' className='w-full'>
                 <button className='px-6 py-3 w-full md:w-fit bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
                   Register Now
                 </button>

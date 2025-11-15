@@ -26,6 +26,62 @@ export const CommonAPI = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getPlayer: builder.query<
+      {
+        id: number;
+        role: {
+          id: number;
+          name: string;
+          category: string;
+        };
+        team: {
+          id: number;
+          name: string;
+          logo: string;
+        };
+        name: string;
+        phone: string;
+        image: string;
+        bkash_transaction_id: string;
+        status: string;
+        tournament: number;
+      }[],
+      { bkash_transaction_id?: number; tournament?: number; phone?: string }
+    >({
+      query: (params) => ({
+        url: '/players',
+        method: 'GET',
+        params,
+      }),
+    }),
+    getPlayerCheck: builder.query<
+      {
+        id: number;
+        role: {
+          id: number;
+          name: string;
+          category: string;
+        };
+        team: {
+          id: number;
+          name: string;
+          logo: string;
+        };
+        name: string;
+        phone: string;
+        image: string;
+        bkash_transaction_id: string;
+        status: string;
+        tournament: number;
+      }[],
+      { bkash_transaction_id?: string; tournament?: string; phone?: string }
+    >({
+      query: (params) => ({
+        url: '/players/check-status',
+        method: 'GET',
+        params,
+      }),
+    }),
     getTeams: builder.query<
       {
         id: number;
@@ -41,7 +97,7 @@ export const CommonAPI = baseApi.injectEndpoints({
     }),
     getTournament: builder.query<
       {
-        id: 1;
+        id: number;
         tournament_rules: {
           title: string;
           rules: string[];
@@ -98,4 +154,6 @@ export const {
   useGetRolesQuery,
   useGetTeamsQuery,
   useGetTournamentQuery,
+  useGetPlayerQuery,
+  useLazyGetPlayerCheckQuery,
 } = CommonAPI;

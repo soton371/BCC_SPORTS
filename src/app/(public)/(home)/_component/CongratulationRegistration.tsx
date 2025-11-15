@@ -12,7 +12,7 @@ const CongratulationRegistration = () => {
           width: '80%',
           height: '100vh', // full screen height (change if needed)
         }}
-        className='mx-auto'
+        className='mx-auto '
       ></div>
     </div>
   );

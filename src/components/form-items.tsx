@@ -5,12 +5,6 @@ import { Controller, FieldValues, get, useController, useFormContext } from 'rea
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { cn } from '@/lib/utils';
-import {
-  FormInputProps,
-  FormInputTextAreaProps,
-  FormRadioProps,
-  FormSelectProps,
-} from '@/type/formItem.interface';
 import { format, formatISO, isDate } from 'date-fns';
 import { CalendarIcon, ChevronLeft, ChevronRight, Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
@@ -20,6 +14,12 @@ import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Textarea } from './ui/textarea';
 import { ScrollArea, ScrollBar } from './ui/scroll-area';
+import {
+  FormInputProps,
+  FormInputTextAreaProps,
+  FormRadioProps,
+  FormSelectProps,
+} from '@/type/formItem.interface';
 
 export function FormInput<T extends FieldValues>({
   name,
@@ -97,11 +97,11 @@ export function FormSelectInput<T extends FieldValues>({
 
   return (
     <FormField
-      disabled
+      // disabled
       control={control}
       name={name}
       render={({ field }) => {
-        // console.log({ value: field.value });
+        console.log({ value: field.value });
         return (
           <FormItem className='relative'>
             <FormLabel>{label}</FormLabel>
@@ -117,7 +117,7 @@ export function FormSelectInput<T extends FieldValues>({
                 </SelectTrigger>
               </FormControl>
               <SelectContent>
-                {options.map((item, index) => (
+                {options?.map((item, index) => (
                   <SelectItem key={index} value={item.value}>
                     {item.label}
                   </SelectItem>

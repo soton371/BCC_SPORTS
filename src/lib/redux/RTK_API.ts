@@ -26,7 +26,7 @@ const baseQuery: BaseQueryFn<string | EnhancedFetchArgs, unknown, FetchBaseQuery
       //   headers.set('authorization', `Bearer ${token}`);
       // }
 
-      headers.set('Accept', 'application/json');
+      // headers.set('Accept', 'application/json');
     },
   });
 

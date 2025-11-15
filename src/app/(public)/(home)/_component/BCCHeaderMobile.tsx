@@ -19,8 +19,8 @@ const BCCHeaderMobile = () => {
   ];
 
   return (
-    <header className='w-full md:hidden relative bg-white'>
-      <div className='flex items-center justify-between h-16 px-4 '>
+    <header className='w-full md:hidden relative bg-white z-50'>
+      <div className='flex items-center justify-between h-16 px-4'>
         {/* Left: Logo */}
         <div className='flex-shrink-0'>
           <Link href='/'>
@@ -35,24 +35,21 @@ const BCCHeaderMobile = () => {
         </div>
 
         {/* Right: Hamburger */}
-        <button
-          className='text-5xl text-black' // white for visibility on green background
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className='text-5xl text-black' onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <HiX /> : <HiMenu />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className='absolute top-full left-0 w-full backdrop-blur-xl bg-white/10 border-t border-white/20 flex flex-col gap-4 p-4 z-40 rounded-b-lg'>
+        <div className='absolute top-full left-0 w-full backdrop-blur-xl bg-white/80 border-t border-black/10 flex flex-col gap-4 p-4 z-40 rounded-b-lg shadow-lg'>
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
               className={`text-lg font-bold text-center py-2 transition ${
-                pathname === link.href ? 'text-yellow-300' : 'text-white hover:text-yellow-300'
+                pathname === link.href ? 'text-yellow-500' : 'text-black hover:text-yellow-500'
               }`}
             >
               {link.label}

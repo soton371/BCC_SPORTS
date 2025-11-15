@@ -3,6 +3,7 @@ import React from 'react';
 import BCCHeader from '../(home)/_component/BCCHeader';
 import Image from 'next/image';
 import PlayerList from '../(home)/_component/PlayerList';
+import PlayerPage from '../(home)/_component/PlayerPage';
 
 const FNSTournament = () => {
   return (
@@ -101,53 +102,7 @@ const FNSTournament = () => {
         </div>
       </div>
 
-      <div className='container mx-auto flex flex-col items-center gap-6 md:gap-8'>
-        {/* -------------------- 1. TAB NAVIGATION (Centered) -------------------- */}
-        {/* Replaced 'inline-flex' with 'flex justify-center' to center the navigation items */}
-        <div className='border-b-[0.40px] border-b-gray-200 w-full flex justify-center container mx-auto gap-8'>
-          {/* Active Tab */}
-          <div className='px-6 py-3 border-b-4 border-orange-500 flex justify-center items-center gap-2.5'>
-            <div className="text-center justify-start text-orange-500 text-lg font-normal font-['Onest'] leading-7">
-              Player List
-            </div>
-          </div>
-
-          {/* Inactive Tabs */}
-          <div className='px-6 py-3 flex justify-center items-center gap-2.5'>
-            <div className="text-center justify-start text-blue-950 text-lg font-normal font-['Onest'] leading-7">
-              Team list
-            </div>
-          </div>
-          <div className='px-6 py-3 flex justify-center items-center gap-2.5'>
-            <div className="text-center justify-start text-blue-950 text-lg font-normal font-['Onest'] leading-7">
-              Match Fixtures
-            </div>
-          </div>
-        </div>
-
-        {/* -------------------- 2. SEARCH BAR (Centered & Responsive) -------------------- */}
-        {/* Removed fixed pixel widths (w-[1239px] and w-[1191px]) */}
-        {/* Added mx-auto for centering and max-w-4xl to set a reasonable max width for the bar */}
-        <div className='w-full max-w-4xl mx-auto h-auto p-3 md:p-4 relative bg-white rounded-2xl shadow-md'>
-          {/* Inner Search Container - using flex and p-2 for better flow */}
-          <div className='w-full h-auto'>
-            <div className='w-full h-auto pl-4 pr-3 py-1 bg-zinc-100 rounded-lg outline outline-1 outline-offset-[-1px] outline-black/0 flex justify-start items-center overflow-hidden'>
-              <div className='flex justify-start items-center gap-2 w-full'>
-                {/* Search Icon */}
-                <div className='w-5 h-5 relative overflow-hidden'>
-                  {/* Assuming this is your search icon */}
-                  🔍
-                </div>
-                {/* Search Text Input */}
-                <div className="text-center justify-start text-neutral-400 text-sm font-light font-['Onest'] leading-6 w-full">
-                  Search players by phone number...
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <PlayerList />
-      </div>
+      <PlayerPage />
     </div>
   );
 };
