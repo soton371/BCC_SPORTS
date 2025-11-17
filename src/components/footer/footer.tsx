@@ -23,7 +23,7 @@ const Footer = () => {
         </div>
 
         {/* MIDDLE SECTION */}
-        <div className='flex-1 flex flex-col gap-6'>
+        {/* <div className='flex-1 flex flex-col gap-6'>
           <div className='text-xl font-bold'>Quick Links</div>
           <div className='flex flex-col gap-3'>
             <a href='#' className='text-lg hover:text-orange-500 transition'>
@@ -39,8 +39,8 @@ const Footer = () => {
               Photo Gallery
             </a>
           </div>
-        </div>
-
+        </div> */}
+        <div></div>
         {/* RIGHT SECTION */}
         <div className='flex-1 flex flex-col gap-6'>
           <div className='text-xl font-bold'>Contact Us</div>

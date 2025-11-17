@@ -4,11 +4,33 @@ import BCCHeader from '../(home)/_component/BCCHeader';
 import Image from 'next/image';
 import PlayerList from '../(home)/_component/PlayerList';
 import PlayerPage from '../(home)/_component/PlayerPage';
+import {
+  useGetTeamsQuery,
+  useGetTournamentQuery,
+  useMatchFixturesQuery,
+} from '@/lib/APIs/common-api';
 
-const FNSTournament = () => {
+const FNSTournament = ({ showHeader = false }: { showHeader?: boolean }) => {
+  const { data: touranment } = useGetTournamentQuery();
+  const { data: teams } = useGetTeamsQuery();
+
+  const startDate = touranment?.[0]?.start_date;
+  const endDate = touranment?.[0]?.end_date;
+
+  const formatDate = (dateString: any) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const formattedStart = formatDate(startDate); // "Dec 16"
+  const formattedEnd = formatDate(endDate);
   return (
-    <div>
-      <BCCHeader />
+    <div className='my-10'>
+      {!showHeader && <BCCHeader />}
 
       {/* 🔥 Fixed Background Wrapper */}
       <div
@@ -25,11 +47,11 @@ const FNSTournament = () => {
         <div className='absolute inset-0 bg-gradient-to-r h-full min-h-[400px] from-teal-950/90 to-teal-950/70' />
 
         {/* Content */}
-        <div className='relative z-10 flex flex-col justify-start items-center gap-10 max-w-3xl px-4 mx-auto py-10'>
+        <div className='relative z-10 flex flex-col justify-start items-center gap-10 w-full max-w-5xl px-4 mx-auto py-10'>
           <div className='flex flex-col justify-start items-center gap-1'>
             {/* Responsive Text Scaling */}
             <div className="text-center text-neutral-50 text-4xl md:text-6xl font-normal font-['Bebas_Neue']">
-              BCC Fan’s Tournament- 2025
+              {touranment?.[0]?.name || "BCC Fan's Tournament - 2025"}
             </div>
             <div className="text-center text-yellow-400 text-xl md:text-2xl font-light font-['Onest']">
               Arranged by BCC - Passion - Unity - Victory
@@ -37,7 +59,7 @@ const FNSTournament = () => {
           </div>
 
           {/* 🔥 Cards Container (Increased gap for 4-column layout) */}
-          <div className='flex flex-wrap justify-center items-center gap-5 md:gap-4 w-full'>
+          <div className='flex flex-wrap md:flex-row justify-center items-center gap-5 md:gap-4 w-full'>
             {/* --- Venue Card --- */}
             {/* 🔥 REMOVED max-w-xs. It is no longer needed since lg:w-1/4 is used. */}
             <div className='w-full sm:w-5/12 lg:w-1/4 px-4 py-3 bg-white/10 rounded-lg flex flex-col justify-start items-center gap-3'>
@@ -48,8 +70,8 @@ const FNSTournament = () => {
                 <div className="text-center text-white text-base font-light font-['Onest']">
                   Venue
                 </div>
-                <div className="text-center text-yellow-400 text-lg font-normal font-['Onest']">
-                  BCC Stadium
+                <div className="text-center text-yellow-400 text-sm font-normal font-['Onest']">
+                  {touranment?.[0]?.venue}
                 </div>
               </div>
             </div>
@@ -64,7 +86,8 @@ const FNSTournament = () => {
                   Date range
                 </div>
                 <div className="text-center text-yellow-400 text-lg font-normal font-['Onest']">
-                  Dec, 16 - 20
+                  {formattedStart.split(' ')[0]}, {formattedStart.split(' ')[1]} -{' '}
+                  {formattedEnd.split(' ')[1]}
                 </div>
               </div>
             </div>
@@ -79,22 +102,7 @@ const FNSTournament = () => {
                   Teams
                 </div>
                 <div className="text-center text-yellow-400 text-lg font-normal font-['Onest']">
-                  6 teams
-                </div>
-              </div>
-            </div>
-
-            {/* --- Champion Card --- */}
-            <div className='w-full sm:w-5/12 lg:w-1/4 px-4 py-3 bg-white/10 rounded-lg flex flex-col justify-start items-center gap-3'>
-              <div className='w-10 h-10 relative overflow-hidden'>
-                {/* Your image/icon code here */}
-              </div>
-              <div className='flex flex-col justify-start items-center gap-1'>
-                <div className="text-center text-white text-base font-light font-['Onest']">
-                  Running Champion
-                </div>
-                <div className="text-center text-yellow-400 text-lg font-normal font-['Onest']">
-                  India
+                  {teams?.length || 0}
                 </div>
               </div>
             </div>

@@ -1,5 +1,26 @@
 import { baseApi } from '../redux/RTK_API';
 
+export interface MatchTeam {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+export interface TournamentMatch {
+  id: number;
+  team_a: MatchTeam;
+  team_b: MatchTeam;
+  title: string;
+  match_date_time: string;
+  venue: string;
+  result: string | null;
+  team_a_score: number | null;
+  team_b_score: number | null;
+  tournament: number;
+}
+
+export type TournamentMatchList = TournamentMatch;
+
 export const CommonAPI = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     updateProfile: builder.mutation<any, FormData>({
@@ -95,12 +116,20 @@ export const CommonAPI = baseApi.injectEndpoints({
         method: 'GET',
       }),
     }),
+    matchFixtures: builder.query<TournamentMatchList[], void>({
+      query: () => ({
+        url: '/match-fixtures/',
+        method: 'GET',
+      }),
+    }),
     getTournament: builder.query<
       {
         id: number;
         tournament_rules: {
           title: string;
-          rules: string[];
+          rules: {
+            rule: string;
+          }[];
         }[];
         name: string;
         description: string;
@@ -156,4 +185,5 @@ export const {
   useGetTournamentQuery,
   useGetPlayerQuery,
   useLazyGetPlayerCheckQuery,
+  useMatchFixturesQuery,
 } = CommonAPI;

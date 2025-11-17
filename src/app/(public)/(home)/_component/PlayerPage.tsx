@@ -3,27 +3,103 @@
 import { useState } from 'react';
 import {
   useGetPlayerQuery,
+  useGetTeamsQuery,
   useGetTournamentQuery,
   useLazyGetPlayerCheckQuery,
+  useMatchFixturesQuery,
 } from '@/lib/APIs/common-api';
+import Image from 'next/image';
 
 const PlayerPage = () => {
   const [activeTab, setActiveTab] = useState('players'); // active tab state
-
+  const { data: teams } = useGetTeamsQuery();
+  const { data: matchFixtures } = useMatchFixturesQuery();
+  console.log(teams);
   return (
     <div className='container mx-auto flex flex-col items-center gap-6 md:gap-8'>
       <PlayerTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <div className='w-full max-w-6xl'>
         {activeTab === 'players' && <PlayerList />}
         {activeTab === 'status' && <CheckStatus />}
-        {activeTab === 'team_list' && <TeamList />}
+        {activeTab === 'team_list' && <TeamList teams={teams} />}
+        {activeTab === 'MatchFixtures' && <MatchFixtures fixtures={matchFixtures} />}
       </div>
     </div>
   );
 };
 
 export default PlayerPage;
+const MatchFixtures = ({ fixtures }: any) => {
+  if (!fixtures) return null;
 
+  const formatDate = (dateString: any) => {
+    const d = new Date(dateString);
+    return d.toLocaleDateString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const formatTime = (dateString: any) => {
+    const d = new Date(dateString);
+    return d.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  return (
+    <div className='grid grid-cols-1  md:grid-cols-2 gap-6'>
+      {fixtures.map((match: any) => (
+        <div
+          key={match.id}
+          className='bg-white rounded-xl shadow-md p-5 flex flex-col md:flex-row items-center justify-between gap-5 hover:shadow-lg transition'
+        >
+          {/* LEFT SIDE - MATCH TITLE & DATE */}
+          <div className='flex flex-col items-start'>
+            <h3 className='text-xl font-semibold text-gray-900'>{match.title}</h3>
+            <p className='text-gray-600 text-sm mt-1'>
+              {formatDate(match.match_date_time)} • {formatTime(match.match_date_time)}
+            </p>
+            <p className='text-gray-500 text-sm'>{match.venue}</p>
+          </div>
+
+          {/* CENTER - LOGOS & VS */}
+          <div className='flex items-center gap-4'>
+            {/* Team A */}
+            <div className='flex flex-col items-center'>
+              <div className='relative w-14 h-14'>
+                <Image
+                  src={match.team_a.logo}
+                  alt={match.team_a.name}
+                  fill
+                  className='object-contain rounded'
+                />
+              </div>
+              <span className='text-sm font-semibold mt-1'>{match.team_a.name}</span>
+            </div>
+
+            <span className='text-lg font-bold text-gray-800'>VS</span>
+
+            {/* Team B */}
+            <div className='flex flex-col items-center'>
+              <div className='relative w-14 h-14'>
+                <Image
+                  src={match.team_b.logo}
+                  alt={match.team_b.name}
+                  fill
+                  className='object-contain rounded'
+                />
+              </div>
+              <span className='text-sm font-semibold mt-1'>{match.team_b.name}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 // --------------------- Tabs ---------------------
 interface PlayerTabsProps {
   activeTab: string;
@@ -34,27 +110,28 @@ const PlayerTabs = ({ activeTab, setActiveTab }: PlayerTabsProps) => {
   const tabs = [
     { id: 'players', label: 'Player List' },
     { id: 'team_list', label: 'Team List' },
+    { id: 'MatchFixtures', label: 'Match Fixtures' },
     { id: 'status', label: 'Check Your Status' },
   ];
 
   return (
-    <div className='border-b-[0.40px] border-b-gray-200 w-full flex justify-center gap-8'>
+    <div className='border-b border-gray-200 w-full flex flex-wrap justify-center gap-2 sm:gap-4 md:gap-8'>
       {tabs.map((tab) => (
-        <div
+        <button
           key={tab.id}
           onClick={() => setActiveTab(tab.id)}
-          className={`md:px-6 py-3 flex justify-center items-center cursor-pointer ${
-            activeTab === tab.id ? 'border-b-4 border-orange-500' : ''
+          className={`px-3 sm:px-4 md:px-6 py-2 md:py-3 flex justify-center items-center cursor-pointer transition-all ${
+            activeTab === tab.id ? 'border-b-4 border-orange-500' : 'border-b-4 border-transparent'
           }`}
         >
-          <p
-            className={`md:text-lg font-normal leading-7 ${
-              activeTab === tab.id ? 'text-orange-500' : 'text-blue-950'
+          <span
+            className={`text-sm sm:text-base md:text-lg font-normal ${
+              activeTab === tab.id ? 'text-orange-500' : 'text-blue-900'
             }`}
           >
             {tab.label}
-          </p>
-        </div>
+          </span>
+        </button>
       ))}
     </div>
   );
@@ -288,12 +365,21 @@ export const CheckStatus = () => {
 };
 
 // --------------------- Search Tab ---------------------
-const TeamList = () => {
+const TeamList = ({ teams }: any) => {
   return (
-    <div className='w-full max-w-4xl mx-auto p-3 md:p-4 bg-white rounded-2xl shadow-md'>
-      <div className='pl-4 pr-3 py-2 bg-zinc-100 rounded-lg flex items-center gap-2'>
-        <p className='text-center text-gray-500 py-10'>Coming Soon...</p>
-      </div>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto mt-8'>
+      {teams &&
+        teams?.map((team: any) => (
+          <div
+            key={team?.id}
+            className='bg-white rounded-xl shadow-md p-4 flex flex-col items-center gap-3 hover:shadow-lg transition'
+          >
+            <div className='w-20 h-20 relative'>
+              <Image src={team?.logo} alt={team?.name} fill className='object-contain rounded-lg' />
+            </div>
+            <h3 className='text-lg font-semibold text-gray-900'>{team?.name}</h3>
+          </div>
+        ))}
     </div>
   );
 };

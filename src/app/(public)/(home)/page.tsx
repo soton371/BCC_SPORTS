@@ -11,6 +11,7 @@ import Banner from './_component/Banner';
 import PowerHouseBCC from './_component/PowerHouseBCC';
 import Link from 'next/link';
 import { useGetTournamentQuery } from '@/lib/APIs/common-api';
+import FNSTournament from '../fans-tournament/page';
 
 export default function Home() {
   const { data: touranment } = useGetTournamentQuery();
@@ -21,9 +22,18 @@ export default function Home() {
         style={{ backgroundImage: "url('/bccImages/bg.jpg')" }}
         className='relative w-full bg-cover bg-center h-[800px]'
       >
-        <div className='relative z-20'>
-          <BCCHeader />
+        <div className='flex justify-center items-center mt-5'>
+          <Image
+            src={'/bccImages/logo.jpg'}
+            alt={'logo'}
+            width={100}
+            height={30}
+            className='object-contain'
+          />
         </div>
+        {/* <div className='relative z-20'>
+          <BCCHeader />
+        </div> */}
         {/* Overlay */}
         <div className='absolute inset-0 bg-black/10 z-10'></div>
 
@@ -48,28 +58,27 @@ export default function Home() {
             <p className='text-lg sm:text-2xl text-neutral-100 leading-relaxed'>
               arranged by - BCC Borogangdia Cricket Club
             </p>
-
-            <div className='flex flex-wrap justify-center md:justify-start gap-2 md:gap-4'>
+            <div className='flex flex-col md:flex-row md:flex-wrap justify-center md:justify-start gap-2 md:gap-4'>
               {(() => {
                 const endDate = touranment?.[0]?.end_date;
                 const isValidDate = endDate && new Date(endDate) >= new Date();
 
                 return isValidDate ? (
-                  <Link href='/sing-up' className='w-full cursor-pointer'>
-                    <button className='px-6 py-3 cursor-pointer w-full min-w-[187px] md:w-fit bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
+                  <Link href='/sing-up' className='w-full md:w-auto'>
+                    <button className='px-6 py-3 w-full min-w-[187px] bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
                       Register Now
                     </button>
                   </Link>
                 ) : (
-                  <Link href='/fans-tournament' className='w-full cursor-pointer'>
-                    <button className='px-6 cursor-pointer py-3 w-full min-w-[187px] md:w-fit bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
+                  <Link href='/fans-tournament' className='w-full md:w-auto'>
+                    <button className='px-6 py-3 w-full min-w-[187px] bg-[#E1E100] text-blue-950 font-semibold rounded-lg hover:bg-yellow-300 transition'>
                       View Details
                     </button>
                   </Link>
                 );
               })()}
 
-              <button className='px-6 w-full md:w-fit py-3 border cursor-pointer border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
+              <button className='px-6 py-3 w-full md:w-auto min-w-[187px] border border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
                 Visit Facebook Page
               </button>
             </div>
@@ -93,8 +102,9 @@ export default function Home() {
       </section>
 
       {/* 📢 Announce Board */}
-      <AnnounceBoard />
+      <AnnounceBoard tournament_rules={(touranment && touranment[0].tournament_rules) || []} />
 
+      <FNSTournament showHeader />
       {/* <BCCMemberList />
 
       <BCCBlog />

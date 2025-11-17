@@ -1,7 +1,6 @@
 'use client';
 
 import { FormInput, FormSelectInput } from '@/components/form-items';
-import BCCHeader from '@/app/(public)/(home)/_component/BCCHeader';
 import { Button } from '@/components/ui/button';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -15,6 +14,7 @@ import {
   useGetTournamentQuery,
 } from '@/lib/APIs/common-api';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 const registerSchema = z.object({
   name: z.string().nonempty({ message: 'Name is required' }),
   role: z.string().nonempty({ message: 'Role is required' }),
@@ -90,7 +90,14 @@ const Register = () => {
 
   return (
     <div className=''>
-      <BCCHeader />
+      <div className='flex justify-center items-center mt-5'>
+        <Link href='/'>
+          <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-blue-950 font-bold text-xl md:text-2xl px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition cursor-pointer'>
+            BACK
+          </div>
+        </Link>
+      </div>
+      {/* <BCCHeader /> */}
 
       {!isSubmitted ? (
         <div className='w-full container mx-auto flex flex-col justify-center my-20'>
@@ -232,7 +239,16 @@ const Register = () => {
 
             {/* RIGHT RULES BOX */}
             <div className='w-full lg:w-[460px] bg-neutral-50/95 rounded-2xl border border-green-600 p-5 overflow-y-auto order-1 lg:order-2'>
-              <div className='px-1 py-2 bg-orange-500 rounded-lg text-center text-white text-xs font-medium'>
+              {touranment && (
+                <div
+                  className='prose max-w-none'
+                  dangerouslySetInnerHTML={{
+                    __html: touranment[0]?.registration_process || '',
+                  }}
+                />
+              )}
+
+              {/* <div className='px-1 py-2 bg-orange-500 rounded-lg text-center text-white text-xs font-medium'>
                 Fans Tournament 2025 – রেজিস্ট্রেশন নিয়মাবলি
               </div>
 
@@ -267,7 +283,7 @@ const Register = () => {
                   (তুর্য্য) ০১৭৭৭-৩২৭২৮০ <br />
                   (ছোটন) ০১৫১৮-৬০৬৩৯৯
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
