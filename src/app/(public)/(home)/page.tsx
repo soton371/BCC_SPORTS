@@ -104,7 +104,7 @@ export default function Home() {
       {/* 📢 Announce Board */}
       <AnnounceBoard tournament_rules={(touranment && touranment[0].tournament_rules) || []} />
 
-      <FNSTournament showHeader />
+      <FNSTournament showHeader={true} />
       {/* <BCCMemberList />
 
       <BCCBlog />

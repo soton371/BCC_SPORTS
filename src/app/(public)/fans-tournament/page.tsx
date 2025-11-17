@@ -2,13 +2,8 @@
 import React from 'react';
 import BCCHeader from '../(home)/_component/BCCHeader';
 import Image from 'next/image';
-import PlayerList from '../(home)/_component/PlayerList';
 import PlayerPage from '../(home)/_component/PlayerPage';
-import {
-  useGetTeamsQuery,
-  useGetTournamentQuery,
-  useMatchFixturesQuery,
-} from '@/lib/APIs/common-api';
+import { useGetTeamsQuery, useGetTournamentQuery } from '@/lib/APIs/common-api';
 
 const FNSTournament = ({ showHeader = false }: { showHeader?: boolean }) => {
   const { data: touranment } = useGetTournamentQuery();
