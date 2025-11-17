@@ -131,6 +131,11 @@ export const CommonAPI = baseApi.injectEndpoints({
             rule: string;
           }[];
         }[];
+        last_champion: {
+          id: number;
+          name: string;
+          logo: string;
+        };
         name: string;
         description: string;
         registration_process: string;

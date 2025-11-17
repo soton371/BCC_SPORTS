@@ -101,6 +101,25 @@ const FNSTournament = ({ showHeader = false }: { showHeader?: boolean }) => {
                 </div>
               </div>
             </div>
+            <div className='w-full sm:w-5/12 lg:w-1/4 px-4 py-3 bg-white/10 rounded-lg flex flex-col justify-start items-center gap-3'>
+              <div className='w-10 h-10 relative overflow-hidden'>
+                <Image
+                  alt='1'
+                  height={60}
+                  width={60}
+                  src={(touranment && touranment[0]?.last_champion?.logo) || ''}
+                />
+              </div>
+              <div className='flex flex-col justify-start items-center gap-1'>
+                <div className="text-center text-white text-base font-light font-['Onest']">
+                  Running Champion
+                </div>
+              </div>
+
+              <div className="text-center text-yellow-400 text-lg font-normal font-['Onest']">
+                {(touranment && touranment[0]?.last_champion?.name) || 'Last Champion'}
+              </div>
+            </div>
           </div>
         </div>
       </div>
