@@ -101,6 +101,8 @@ const FNSTournament = ({ showHeader = false }: { showHeader?: boolean }) => {
                 </div>
               </div>
             </div>
+
+            {/* --- Running Champion Card --- */}
             <div className='w-full sm:w-5/12 lg:w-1/4 px-4 py-3 bg-white/10 rounded-lg flex flex-col justify-start items-center gap-3'>
               <div className='w-10 h-10 relative overflow-hidden'>
                 <Image
@@ -121,7 +123,9 @@ const FNSTournament = ({ showHeader = false }: { showHeader?: boolean }) => {
               </div>
             </div>
           </div>
+          {/* 🔥 end card container */}
         </div>
+        {/* 🔥 end content */}
       </div>
 
       <PlayerPage />

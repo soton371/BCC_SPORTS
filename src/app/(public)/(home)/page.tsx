@@ -22,7 +22,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/bccImages/bg.jpg')" }}
         className='relative w-full bg-cover bg-center h-[800px]'
       >
-        <div className='flex justify-center items-center mt-5'>
+        {/* <div className='flex justify-center items-center mt-5'>
           <Image
             src={'/bccImages/logo.jpg'}
             alt={'logo'}
@@ -30,7 +30,7 @@ export default function Home() {
             height={30}
             className='object-contain'
           />
-        </div>
+        </div> */}
         {/* <div className='relative z-20'>
           <BCCHeader />
         </div> */}
@@ -56,7 +56,7 @@ export default function Home() {
             </div>
 
             <p className='text-lg sm:text-2xl text-neutral-100 leading-relaxed'>
-              arranged by - BCC Borogangdia Cricket Club
+              Arranged by - BCC Borogangdia Cricket Club
             </p>
             <div className='flex flex-col md:flex-row md:flex-wrap justify-center md:justify-start gap-2 md:gap-4'>
               {(() => {
@@ -77,10 +77,12 @@ export default function Home() {
                   </Link>
                 );
               })()}
-
-              <button className='px-6 py-3 w-full md:w-auto min-w-[187px] border border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
+<Link href='https://www.facebook.com/profile.php?id=61580442497092' >
+<button className='px-6 py-3 w-full md:w-auto min-w-[187px] border border-white text-white rounded-lg hover:bg-white hover:text-black transition'>
                 Visit Facebook Page
               </button>
+</Link>
+              
             </div>
           </div>
 
